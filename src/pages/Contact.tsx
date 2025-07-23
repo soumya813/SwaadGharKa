@@ -88,7 +88,7 @@ export const ContactPage = () => {
                 <Phone className="h-8 w-8 text-white" />
               </div>
               <h3 className="font-bold text-lg text-foreground mb-2">Call Us</h3>
-              <p className="text-warm-orange font-semibold text-lg">(555) 123-FOOD</p>
+              <p className="text-warm-orange font-semibold text-lg">+91 9871880053</p>
               <p className="text-sm text-muted-foreground mt-1">Available 24/7</p>
             </CardContent>
           </Card>
@@ -99,7 +99,7 @@ export const ContactPage = () => {
                 <Mail className="h-8 w-8 text-white" />
               </div>
               <h3 className="font-bold text-lg text-foreground mb-2">Email Us</h3>
-              <p className="text-sage-green font-semibold">hello@swaadgharka.com</p>
+              <p className="text-sage-green font-semibold">soumyasrivastav53@gmail.com</p>
               <p className="text-sm text-muted-foreground mt-1">Response in 2 hours</p>
             </CardContent>
           </Card>
@@ -110,8 +110,8 @@ export const ContactPage = () => {
                 <MapPin className="h-8 w-8 text-white" />
               </div>
               <h3 className="font-bold text-lg text-foreground mb-2">Visit Us</h3>
-              <p className="text-purple-600 font-semibold">123 Kitchen Street</p>
-              <p className="text-sm text-muted-foreground mt-1">City, State 12345</p>
+              <p className="text-purple-600 font-semibold">R-011, Indiabulls Centrum Park</p>
+              <p className="text-sm text-muted-foreground mt-1">Haryana-122006</p>
             </CardContent>
           </Card>
 
@@ -121,8 +121,8 @@ export const ContactPage = () => {
                 <Clock className="h-8 w-8 text-white" />
               </div>
               <h3 className="font-bold text-lg text-foreground mb-2">Hours</h3>
-              <p className="text-blue-600 font-semibold">11AM - 9PM</p>
-              <p className="text-sm text-muted-foreground mt-1">Daily</p>
+              <p className="text-blue-600 font-semibold">8AM - 8PM</p>
+              <p className="text-sm text-muted-foreground mt-1">Sat-Sun</p>
             </CardContent>
           </Card>
         </div>
@@ -181,7 +181,7 @@ export const ContactPage = () => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         className="mt-1"
-                        placeholder="(555) 123-4567"
+                        placeholder="+91 9871880053"
                       />
                     </div>
                     <div>
@@ -268,7 +268,7 @@ export const ContactPage = () => {
               <MessageCircle className="h-4 w-4 text-warm-orange" />
               <AlertDescription className="text-warm-orange">
                 <strong>Need immediate help?</strong> Call us at{" "}
-                <span className="font-bold">(555) 123-FOOD</span> for instant support!
+                <span className="font-bold">+91 9871880053</span> for instant support!
               </AlertDescription>
             </Alert>
 

@@ -19,7 +19,7 @@ export const Contact = () => {
             <CardContent className="p-6 text-center">
               <div className="text-2xl mb-3">📞</div>
               <h3 className="font-semibold text-foreground mb-2">Call Us</h3>
-              <p className="text-muted-foreground">(555) 123-FOOD</p>
+              <p className="text-muted-foreground">+91 9871880053</p>
             </CardContent>
           </Card>
           
@@ -27,7 +27,7 @@ export const Contact = () => {
             <CardContent className="p-6 text-center">
               <div className="text-2xl mb-3">⏰</div>
               <h3 className="font-semibold text-foreground mb-2">Hours</h3>
-              <p className="text-muted-foreground">Daily 11AM - 9PM</p>
+              <p className="text-muted-foreground">Sat-Sun 8AM - 8PM</p>
             </CardContent>
           </Card>
           

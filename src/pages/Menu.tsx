@@ -6,149 +6,73 @@ import { Input } from "@/components/ui/input";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 
-const menuCategories = [
-  { id: "all", name: "All", icon: "🍽️" },
-  { id: "mains", name: "Main Dishes", icon: "🍖" },
-  { id: "soups", name: "Soups & Stews", icon: "🍲" },
-  { id: "salads", name: "Fresh Salads", icon: "🥗" },
-  { id: "desserts", name: "Desserts", icon: "🍰" },
-  { id: "beverages", name: "Beverages", icon: "🥤" }
-];
-
 const menuItems = [
   {
     id: 1,
-    name: "Grandma's Beef Stew",
-    category: "mains",
-    description: "Tender beef chunks with carrots, potatoes, and herbs in rich gravy",
-    price: 19.99,
-    servings: "4-6 servings",
-    prepTime: "3 hours",
-    dietary: ["gluten-free"],
+    name: "Idli",
+    description: "4 idlis served with coconut chutney and sambar",
+    price: 99,
+    dietary: [],
     popular: true,
     image: "🍲"
   },
   {
     id: 2,
-    name: "Homestyle Chicken Potpie",
-    category: "mains", 
-    description: "Classic comfort food with tender chicken and vegetables in flaky crust",
-    price: 16.99,
-    servings: "3-4 servings",
-    prepTime: "1 hour",
+    name: "Veg Cutlet",
+    description: "5 pieces of crispy vegetable cutlets served with mint chutney",
+    price: 99,
     dietary: [],
     popular: true,
     image: "🥧"
   },
   {
     id: 3,
-    name: "Garden Vegetable Lasagna",
-    category: "mains",
-    description: "Layers of pasta with roasted vegetables, ricotta, and marinara sauce",
-    price: 18.99,
-    servings: "4-6 servings", 
-    prepTime: "1.5 hours",
-    dietary: ["vegetarian"],
+    name: "BreadRolls",
+    description: "4 pieces of spiced potato bread rolls served with tangy chutney",
+    price: 99,
+    dietary: [],
     popular: false,
-    image: "🍝"
+    image: "🥬"
   },
   {
     id: 4,
-    name: "Hearty Tomato Basil Soup",
-    category: "soups",
-    description: "Rich, creamy tomato soup with fresh basil and herbs",
-    price: 8.99,
-    servings: "2-3 servings",
-    prepTime: "45 minutes", 
-    dietary: ["vegetarian", "gluten-free"],
+    name: "Paneer BreadRolls",
+    description: "4 pieces of crispy paneer bread rolls served with mint chutney",
+    price: 120,
+    dietary: [],
     popular: false,
     image: "🍅"
   },
   {
     id: 5,
-    name: "Country Chicken Noodle Soup",
-    category: "soups",
-    description: "Traditional chicken soup with egg noodles, carrots, and celery",
-    price: 10.99,
-    servings: "2-3 servings",
-    prepTime: "2 hours",
+    name: "Dosa",
+    description: "one masala dosa served with chutney and sambar",
+    price: 99,
     dietary: [],
     popular: true,
-    image: "🍜"
+    image: "🍲"
   },
   {
     id: 6,
-    name: "Fresh Caesar Salad", 
-    category: "salads",
-    description: "Crisp romaine lettuce with homemade Caesar dressing and croutons",
-    price: 11.99,
-    servings: "2-3 servings",
-    prepTime: "15 minutes",
+    name: "Lunch Box Special",
+    description: "Two roti, one sabzi, one dal, and rice",
+    price: 199,
     dietary: ["vegetarian"],
     popular: false,
-    image: "🥬"
+    image: "🍱"
   },
-  {
-    id: 7,
-    name: "Quinoa Power Bowl",
-    category: "salads", 
-    description: "Nutritious quinoa with roasted vegetables, avocado, and tahini dressing",
-    price: 13.99,
-    servings: "1-2 servings",
-    prepTime: "30 minutes",
-    dietary: ["vegan", "gluten-free"],
-    popular: false,
-    image: "🥙"
-  },
-  {
-    id: 8,
-    name: "Classic Apple Pie",
-    category: "desserts",
-    description: "Traditional apple pie with cinnamon and flaky, buttery crust",
-    price: 14.99,
-    servings: "6-8 servings",
-    prepTime: "2 hours",
-    dietary: ["vegetarian"],
-    popular: true,
-    image: "🥧"
-  },
-  {
-    id: 9,
-    name: "Chocolate Chip Cookies",
-    category: "desserts",
-    description: "Fresh-baked cookies with premium chocolate chips",
-    price: 6.99,
-    servings: "12 cookies",
-    prepTime: "30 minutes",
-    dietary: ["vegetarian"],
-    popular: false,
-    image: "🍪"
-  },
-  {
-    id: 10,
-    name: "Fresh Lemonade",
-    category: "beverages",
-    description: "House-made lemonade with fresh lemons and mint",
-    price: 3.99,
-    servings: "1 serving",
-    prepTime: "5 minutes", 
-    dietary: ["vegan", "gluten-free"],
-    popular: false,
-    image: "🍋"
-  }
+  
 ];
 
 export const MenuPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const { addItem } = useCart();
   const { toast } = useToast();
 
   const filteredItems = menuItems.filter(item => {
-    const matchesCategory = selectedCategory === "all" || item.category === selectedCategory;
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          item.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
+    return matchesSearch;
   });
 
   const handleAddToCart = (item: typeof menuItems[0]) => {
@@ -197,20 +121,6 @@ export const MenuPage = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="max-w-md mx-auto"
           />
-          
-          <div className="flex flex-wrap justify-center gap-3">
-            {menuCategories.map((category) => (
-              <Button
-                key={category.id}
-                variant={selectedCategory === category.id ? "hero" : "outline"}
-                onClick={() => setSelectedCategory(category.id)}
-                className="flex items-center gap-2"
-              >
-                <span>{category.icon}</span>
-                {category.name}
-              </Button>
-            ))}
-          </div>
         </div>
 
         {/* Menu Items Grid */}
@@ -244,21 +154,9 @@ export const MenuPage = () => {
                   </div>
                 )}
 
-                {/* Item Details */}
-                <div className="space-y-2 mb-4 text-sm text-muted-foreground">
-                  <div className="flex justify-between">
-                    <span>Serves:</span>
-                    <span>{item.servings}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Prep time:</span>
-                    <span>{item.prepTime}</span>
-                  </div>
-                </div>
-
                 {/* Price and Add to Cart */}
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold bg-gradient-premium bg-clip-text text-transparent">${item.price}</span>
+                  <span className="text-2xl font-bold bg-gradient-premium bg-clip-text text-transparent">Rs {item.price}</span>
                   <Button 
                     variant="sage" 
                     onClick={() => handleAddToCart(item)}

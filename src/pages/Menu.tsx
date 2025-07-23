@@ -186,8 +186,6 @@ export const MenuPage = () => {
             Discover our daily selection of home-cooked meals, prepared with love and the finest ingredients
           </p>
         </div>
-        <div className="absolute top-10 left-10 text-6xl opacity-20 animate-float">🍽️</div>
-        <div className="absolute bottom-10 right-10 text-4xl opacity-30 animate-float" style={{ animationDelay: '1.5s' }}>👨‍🍳</div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-12">

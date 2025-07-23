@@ -9,7 +9,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useCart } from "@/context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { CreditCard, MapPin, User, Mail, Phone, ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
+import { CreditCard, MapPin, User, Mail, Phone, ArrowRight, CheckCircle, AlertCircle, Smartphone, Copy } from "lucide-react";
 import { StripePayment } from "@/components/StripePayment";
 
 export const PaymentPage = () => {
@@ -18,6 +18,8 @@ export const PaymentPage = () => {
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState<'info' | 'payment' | 'success'>('info');
   const [error, setError] = useState<string>('');
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'upi'>('upi');
+  const [upiId, setUpiId] = useState('');
   
   const [formData, setFormData] = useState({
     firstName: "",
@@ -79,6 +81,29 @@ export const PaymentPage = () => {
     setTimeout(() => {
       navigate("/");
     }, 3000);
+  };
+
+  const handleUpiPayment = () => {
+    // Simulate UPI payment confirmation
+    toast({
+      title: "Processing payment confirmation...",
+      description: "Please wait while we verify your payment",
+      duration: 3000,
+    });
+
+    // Simulate payment verification delay
+    setTimeout(() => {
+      handlePaymentSuccess();
+    }, 2000);
+  };
+
+  const copyUpiId = (id: string) => {
+    navigator.clipboard.writeText(id);
+    toast({
+      title: "UPI ID Copied!",
+      description: `${id} has been copied to clipboard`,
+      duration: 2000,
+    });
   };
 
   const handlePaymentError = (errorMessage: string) => {
@@ -364,16 +389,115 @@ export const PaymentPage = () => {
                   ← Back to Information
                 </Button>
                 
-                <StripePayment
-                  amount={finalTotal}
-                  onSuccess={handlePaymentSuccess}
-                  onError={handlePaymentError}
-                  customerInfo={{
-                    name: `${formData.firstName} ${formData.lastName}`,
-                    email: formData.email,
-                    phone: formData.phone,
-                  }}
-                />
+                {/* Payment Method Selection */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <CreditCard className="h-5 w-5" />
+                      Choose Payment Method
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <Button
+                        variant={paymentMethod === 'upi' ? 'default' : 'outline'}
+                        onClick={() => setPaymentMethod('upi')}
+                        className="h-20 flex flex-col items-center gap-2"
+                      >
+                        <Smartphone className="h-6 w-6" />
+                        <div className="text-center">
+                          <div className="font-semibold">UPI Payment</div>
+                          <div className="text-sm text-muted-foreground">PhonePe, Google Pay, Paytm</div>
+                        </div>
+                      </Button>
+                      <Button
+                        variant={paymentMethod === 'card' ? 'default' : 'outline'}
+                        onClick={() => setPaymentMethod('card')}
+                        className="h-20 flex flex-col items-center gap-2"
+                      >
+                        <CreditCard className="h-6 w-6" />
+                        <div className="text-center">
+                          <div className="font-semibold">Card Payment</div>
+                          <div className="text-sm text-muted-foreground">Credit/Debit Card</div>
+                        </div>
+                      </Button>
+                    </div>
+
+                    {paymentMethod === 'upi' && (
+                      <div className="space-y-4">
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                          <h4 className="font-semibold text-blue-900 mb-4 text-center text-lg">Pay with UPI</h4>
+                          
+                          {/* QR Code Section */}
+                          <div className="flex flex-col items-center mb-6">
+                            <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+                              <div className="w-48 h-48 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
+                                <div className="text-center">
+                                  <div className="text-4xl mb-2">📱</div>
+                                  <div className="text-sm text-gray-600">QR Code</div>
+                                  <div className="text-xs text-gray-500">Scan to Pay</div>
+                                </div>
+                              </div>
+                            </div>
+                            <p className="text-blue-700 text-sm text-center font-medium">
+                              Scan QR code with any UPI app to pay Rs {finalTotal}
+                            </p>
+                          </div>
+
+                          {/* UPI ID Section */}
+                          <div className="text-center">
+                            <p className="text-blue-700 text-sm mb-2">Or pay directly using UPI ID:</p>
+                            <div className="flex items-center justify-center bg-white rounded-lg p-3 border border-blue-200 mb-4">
+                              <span className="font-mono text-lg font-semibold text-gray-800">swaadgharka@paytm</span>
+                              <Button 
+                                size="sm" 
+                                variant="ghost"
+                                onClick={() => copyUpiId('swaadgharka@paytm')}
+                                className="ml-2"
+                              >
+                                <Copy className="h-4 w-4" />
+                              </Button>
+                            </div>
+                            <p className="text-xs text-blue-600">
+                              Amount: Rs {finalTotal} | Name: SwaadGharKa
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <Button
+                            onClick={handleUpiPayment}
+                            className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-600 hover:to-blue-600 text-white font-semibold"
+                          >
+                            <Smartphone className="mr-2 h-5 w-5" />
+                            I have completed the payment
+                          </Button>
+                        </div>
+
+                        <Alert>
+                          <AlertCircle className="h-4 w-4" />
+                          <AlertDescription>
+                            After making the UPI payment, click the button above to confirm your order. 
+                            Do not refresh the page.
+                          </AlertDescription>
+                        </Alert>
+                      </div>
+                    )}
+
+                    {paymentMethod === 'card' && (
+                      <StripePayment
+                        amount={finalTotal}
+                        onSuccess={handlePaymentSuccess}
+                        onError={handlePaymentError}
+                        customerInfo={{
+                          name: `${formData.firstName} ${formData.lastName}`,
+                          email: formData.email,
+                          phone: formData.phone,
+                        }}
+                      />
+                    )}
+                  </CardContent>
+                </Card>
               </div>
             )}
           </div>

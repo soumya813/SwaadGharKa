@@ -4,7 +4,7 @@ import heroImage from "@/assets/hero-kitchen.jpg";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-16">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-16">
       {/* Enhanced Background with Parallax Effect */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-110"

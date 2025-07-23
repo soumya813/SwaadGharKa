@@ -29,7 +29,7 @@ export const PaymentPage = () => {
     zipCode: "",
   });
 
-  const deliveryFee = totalPrice > 50 ? 0 : 5.99;
+  const deliveryFee = totalPrice > 500 ? 0 : 50;
   const tax = totalPrice * 0.08;
   const finalTotal = totalPrice + deliveryFee + tax;
 
@@ -68,7 +68,7 @@ export const PaymentPage = () => {
   const handlePaymentSuccess = () => {
     toast({
       title: "🎉 Order placed successfully!",
-      description: `Your order for $${finalTotal.toFixed(2)} has been confirmed. You'll receive an email confirmation shortly.`,
+      description: `Your order for Rs ${finalTotal} has been confirmed. You'll receive an email confirmation shortly.`,
       duration: 5000,
     });
     
@@ -92,7 +92,7 @@ export const PaymentPage = () => {
 
   if (totalItems === 0) {
     return (
-      <div className="min-h-screen pt-20 bg-gradient-to-b from-light-cream to-cream">
+      <div className="min-h-screen pt-16 bg-gradient-to-b from-light-cream to-cream">
         <div className="max-w-2xl mx-auto px-4 py-16 text-center">
           <div className="text-8xl mb-6">🛒</div>
           <h1 className="text-3xl font-bold text-foreground mb-4">Your cart is empty</h1>
@@ -110,7 +110,7 @@ export const PaymentPage = () => {
 
   if (currentStep === 'success') {
     return (
-      <div className="min-h-screen pt-20 bg-gradient-to-b from-light-cream to-cream">
+      <div className="min-h-screen pt-16 bg-gradient-to-b from-light-cream to-cream">
         <div className="max-w-2xl mx-auto px-4 py-16 text-center">
           <div className="mb-8">
             <CheckCircle className="h-24 w-24 text-green-500 mx-auto mb-6" />
@@ -119,7 +119,7 @@ export const PaymentPage = () => {
               Thank you for your order! We're preparing your delicious meal.
             </p>
             <div className="bg-white p-6 rounded-2xl shadow-lg mb-6">
-              <p className="text-lg font-semibold text-warm-orange mb-2">Order Total: ${finalTotal.toFixed(2)}</p>
+              <p className="text-lg font-semibold text-warm-orange mb-2">Order Total: Rs {finalTotal}</p>
               <p className="text-sm text-gray-600">Estimated delivery: 45 minutes</p>
             </div>
             <p className="text-sm text-gray-500">Redirecting to home page...</p>
@@ -130,7 +130,7 @@ export const PaymentPage = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20 bg-gradient-to-b from-light-cream to-cream">
+    <div className="min-h-screen pt-16 bg-gradient-to-b from-light-cream to-cream">
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
@@ -190,7 +190,7 @@ export const PaymentPage = () => {
                       <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
                     </div>
                     <span className="font-semibold text-warm-orange">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      Rs {(item.price * item.quantity)}
                     </span>
                   </div>
                 ))}
@@ -200,27 +200,27 @@ export const PaymentPage = () => {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
-                    <span>${totalPrice.toFixed(2)}</span>
+                    <span>Rs {totalPrice}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Delivery Fee</span>
-                    <span>{deliveryFee === 0 ? 'FREE' : `$${deliveryFee.toFixed(2)}`}</span>
+                    <span>{deliveryFee === 0 ? 'FREE' : `Rs ${deliveryFee}`}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Tax</span>
-                    <span>${tax.toFixed(2)}</span>
+                    <span>Rs {Math.round(tax)}</span>
                   </div>
                   <Separator />
                   <div className="flex justify-between text-lg font-bold text-warm-orange">
                     <span>Total</span>
-                    <span>${finalTotal.toFixed(2)}</span>
+                    <span>Rs {finalTotal}</span>
                   </div>
                 </div>
                 
                 {deliveryFee === 0 && (
                   <Alert className="border-green-200 bg-green-50">
                     <AlertDescription className="text-green-800">
-                      🎉 You qualify for free delivery! (Orders over $50)
+                      🎉 You qualify for free delivery! (Orders over Rs 500)
                     </AlertDescription>
                   </Alert>
                 )}

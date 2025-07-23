@@ -46,7 +46,7 @@ export const Cart = () => {
                 <span className="text-2xl">{item.image}</span>
                 <div className="flex-1">
                   <h4 className="font-medium text-sm">{item.name}</h4>
-                  <p className="text-warm-orange font-bold">${item.price.toFixed(2)}</p>
+                  <p className="text-warm-orange font-bold">Rs {item.price}</p>
                 </div>
                 
                 <div className="flex items-center gap-1">
@@ -86,7 +86,7 @@ export const Cart = () => {
             
             <div className="flex justify-between items-center font-bold text-lg">
               <span>Total:</span>
-              <span className="text-warm-orange">${totalPrice.toFixed(2)}</span>
+              <span className="text-warm-orange">Rs {totalPrice}</span>
             </div>
             
             <Button 

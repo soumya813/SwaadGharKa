@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import { MenuPage } from "./pages/Menu";
 import { PaymentPage } from "./pages/Payment";
 import { ContactPage } from "./pages/Contact";
+import { AboutPage } from "./pages/About";
 import { Navigation } from "./components/Navigation";
 import { ChatWidget } from "./components/ChatWidget";
 import { CartProvider } from "./context/CartContext";
@@ -25,6 +26,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/menu" element={<MenuPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/contact" element={<ContactPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

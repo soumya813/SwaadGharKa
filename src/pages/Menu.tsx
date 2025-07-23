@@ -41,7 +41,7 @@ const menuItems = [
     price: 120,
     dietary: [],
     popular: false,
-    image: "🍅"
+    image: "🧈"
   },
   {
     id: 5,
@@ -102,7 +102,7 @@ export const MenuPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-gradient-hero text-white py-20 relative overflow-hidden">
+      <div className="bg-gradient-hero text-white py-20 relative overflow-hidden mt-16">
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10"></div>
         <div className="max-w-7xl mx-auto px-4 text-center relative">
           <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">Our Menu</h1>

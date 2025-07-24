@@ -267,8 +267,8 @@ menuItemSchema.virtual('isCurrentlyAvailable').get(function() {
   if (!this.availability.isAvailable) return false;
   
   const now = new Date();
-  const currentDay = now.toLocaleLowerCase().substring(0, 3) + 
-                     now.toLocaleLowerCase().substring(3);
+  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const currentDay = dayNames[now.getDay()];
   const currentTime = now.getHours().toString().padStart(2, '0') + 
                       ':' + now.getMinutes().toString().padStart(2, '0');
   

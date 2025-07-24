@@ -8,10 +8,7 @@ const Order = require('../models/Order');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log('✅ MongoDB Connected');
   } catch (error) {
     console.error('❌ MongoDB connection error:', error);
@@ -147,7 +144,7 @@ const seedMenuItems = async () => {
       price: 280,
       category: 'main-course',
       cuisine: 'north-indian',
-      tags: ['non-vegetarian', 'creamy', 'comfort-food'],
+      tags: ['halal', 'comfort-food'],
       spiceLevel: 'mild',
       preparationTime: 35,
       servingSize: '2-3 people',
@@ -196,7 +193,7 @@ const seedMenuItems = async () => {
       originalPrice: 350,
       category: 'rice-biryani',
       cuisine: 'hyderabadi',
-      tags: ['non-vegetarian', 'traditional', 'family-pack'],
+      tags: ['halal', 'traditional', 'family-pack'],
       spiceLevel: 'medium',
       preparationTime: 60,
       servingSize: '2-3 people',
@@ -289,7 +286,7 @@ const seedMenuItems = async () => {
       price: 30,
       category: 'beverages',
       cuisine: 'north-indian',
-      tags: ['vegetarian', 'healthy', 'fresh'],
+      tags: ['vegetarian', 'healthy', 'traditional'],
       spiceLevel: 'mild',
       preparationTime: 5,
       servingSize: '1 person',

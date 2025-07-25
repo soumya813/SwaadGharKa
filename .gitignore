@@ -22,6 +22,11 @@ backend/.env.local
 backend/.env.development
 backend/.env.production
 
+# Security and credential files
+UPDATE_CREDENTIALS.md
+SECURITY_ALERT.md
+*_CREDENTIALS.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
